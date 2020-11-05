@@ -181,9 +181,7 @@ end
 def player_stats name
   game_hash.each do |k,v|
     game_hash[k][:players].each do |hash| 
-      if hash[:player_name] == name
-        return hash
-      end  
+      return hash if hash[:player_name] == name 
     end
   end  
 end
@@ -205,11 +203,7 @@ def winning_team
   game_hash[:away][:players].each do |hash|
     away_points = away_points + hash[:points]
   end
-  if home_points > away_points
-    game_hash[:home][:team_name]  
-  else 
-    game_hash[:away][:team_name]
-  end
+  home_points > away_points ? game_hash[:home][:team_name] : game_hash[:away][:team_name]
 end  
 
 def player_with_longest_name
